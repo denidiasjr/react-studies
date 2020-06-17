@@ -1,15 +1,27 @@
-import { useEffect } from 'react';
 import axios from 'axios';
+import Thumbnail from '../../components/Thumbnail';
 
-const Home = (props) => {
+const Home = ({ shows }) => {
+
+  const renderShows = () => {
+    return shows.map((showItem, index) => (
+      <li key={index}>
+        <Thumbnail imageUrl={showItem?.show?.image?.medium} caption={showItem?.show?.name} />
+      </li>
+    ))
+  }
+
   return (
-    <h1>My country page</h1>
+    <ul className="tvshow-list">
+      {renderShows()}
+    </ul>
   )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async context => {
 
-  const response = await axios.get('http://api.tvmaze.com/schedule?country=US&date=2014-12-01')
+  const country = context?.query?.country || 'us';
+  const response = await axios.get(`http://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`);
 
   return {
     props: {
