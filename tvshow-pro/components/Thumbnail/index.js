@@ -1,9 +1,14 @@
+import Link from 'next/link';
 import './styles.scss';
 
-const Thumbnail = ({ imageUrl, caption }) => (
+const Thumbnail = ({ imageUrl, caption, href = '', as = '' }) => (
   <div className="thumbnail">
-    <img src={imageUrl} className="thumbnail__image" />
-    <h3 className="thumbnail__caption">{caption}</h3>
+    <Link href={href} as={as}>
+      <a>
+        <img src={imageUrl} className="thumbnail__image" />
+        <h3 className="thumbnail__caption">{caption}</h3>
+      </a>
+    </Link>
   </div>
 )
 

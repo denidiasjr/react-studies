@@ -2,17 +2,23 @@ import axios from 'axios';
 import Thumbnail from '../../components/Thumbnail';
 import Link from 'next/link';
 
-const Home = ({ shows }) => {
+const Home = ({ shows, country }) => {
 
   const renderShows = () => {
     return shows.map((showItem, index) => {
 
       const { show } = showItem;
       const defaultImageUrl = 'https://via.placeholder.com/210x295?text=?';
+      const showUrl = `/${country}/${show?.id}`;
 
       return (
         <li key={index}>
-          <Thumbnail imageUrl={show?.image?.medium || defaultImageUrl} caption={show?.name} />
+          <Thumbnail
+            imageUrl={show?.image?.medium || defaultImageUrl}
+            caption={show?.name}
+            href="/[country]/[showId]"
+            as={showUrl}
+          />
         </li>
       )
     })
@@ -35,7 +41,8 @@ export const getServerSideProps = async context => {
 
   return {
     props: {
-      shows: response.data
+      shows: response.data,
+      country
     }
   }
 }
