@@ -1,5 +1,6 @@
 // import App from 'next/app'
 import Header from '../components/Header';
+import './styles.scss'
 
 function MyApp({ Component, pageProps }) {
   return (
