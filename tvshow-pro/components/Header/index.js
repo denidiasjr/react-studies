@@ -28,7 +28,10 @@ const Header = () => {
   }
 
   const handleChange = event => {
-    setSelectedCountry(event?.target?.value);
+    const valueSelected = event?.target?.value;
+
+    setSelectedCountry(valueSelected);
+    router.push('/[country]', `/${valueSelected}`)
   }
 
   return (
