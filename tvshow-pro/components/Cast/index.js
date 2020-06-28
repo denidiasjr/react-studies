@@ -16,7 +16,11 @@ const Cast = ({ cast }) => {
 
       return (
         <li key={index}>
-          <Thumbnail imageUrl={image?.medium || defaultImageUrl} caption={name} />
+          <Thumbnail
+            imageUrl={image?.medium || defaultImageUrl}
+            caption={name}
+            small
+          />
         </li>
       );
     });
