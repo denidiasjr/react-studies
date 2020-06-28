@@ -1,7 +1,6 @@
 import axios from 'axios';
 import htmlParse from 'html-react-parser';
 import Cast from '../../../components/Cast';
-import Header from '../../../components/Header';
 import './styles.scss';
 
 const Details = ({ show }) => {
@@ -19,7 +18,6 @@ const Details = ({ show }) => {
 
   return (
     <div className="show-details">
-      <Header />
       <div className="show-details__poster" style={{ backgroundImage: `url(${image.original})` }}></div>
       <h3>{name}</h3>
       {htmlParse(summary)}

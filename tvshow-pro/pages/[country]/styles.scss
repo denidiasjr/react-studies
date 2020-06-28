@@ -1,9 +1,11 @@
-.tvshow-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  list-style-type: none;
-
-  .thumbnail {
-    margin-right: 10px;
+.home {
+  .tvshow-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    list-style-type: none;
+  
+    .thumbnail {
+      margin-right: 10px;
+    }
   }
 }
