@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Thumbnail from '../../components/Thumbnail';
-import Link from 'next/link';
+import './styles.scss';
 
 const Home = ({ shows, country }) => {
 
@@ -26,9 +26,6 @@ const Home = ({ shows, country }) => {
 
   return (
     <ul className="tvshow-list">
-      <Link href="/about">
-        About
-      </Link>
       {renderShows()}
     </ul>
   )
