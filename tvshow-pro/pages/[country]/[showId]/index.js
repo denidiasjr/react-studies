@@ -1,6 +1,7 @@
 import axios from 'axios';
 import htmlParse from 'html-react-parser';
 import Cast from '../../../components/Cast';
+import Header from '../../../components/Header';
 import './styles.scss';
 
 const Details = ({ show }) => {
@@ -10,16 +11,19 @@ const Details = ({ show }) => {
     image,
     summary,
     _embedded: {
-      cast
+      cast = []
     }
   } = show;
 
+  const renderCast = () => cast.length > 0 && <Cast cast={cast} />
+
   return (
     <div className="show-details">
+      <Header />
       <div className="show-details__poster" style={{ backgroundImage: `url(${image.original})` }}></div>
       <h3>{name}</h3>
       {htmlParse(summary)}
-      <Cast cast={cast} />
+      {renderCast()}
     </div>
   )
 }

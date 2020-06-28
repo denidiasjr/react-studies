@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Thumbnail from '../../components/Thumbnail';
+import Header from '../../components/Header';
 import './styles.scss';
 
 const Home = ({ shows, country }) => {
@@ -25,9 +26,12 @@ const Home = ({ shows, country }) => {
   }
 
   return (
-    <ul className="tvshow-list">
-      {renderShows()}
-    </ul>
+    <div>
+      <Header />
+      <ul className="tvshow-list">
+        {renderShows()}
+      </ul>
+    </div>
   )
 }
 
