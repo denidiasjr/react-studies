@@ -1,18 +1,30 @@
 import axios from 'axios';
 import htmlParse from 'html-react-parser';
+import Error from 'next/error';
 import Cast from '../../../components/Cast';
 import './styles.scss';
 
-const Details = ({ show }) => {
+const Details = ({ show = {}, statusCode }) => {
 
   const {
     name,
     image,
     summary,
-    _embedded: {
-      cast = []
-    }
+    _embedded
   } = show;
+
+  if (statusCode) {
+    return (
+      <Error
+        statusCode={statusCode}
+        title="Sorry, we had an error trying to get you TV Show"
+      />
+    );
+  }
+
+  const {
+    cast = []
+  } = _embedded;
 
   const renderCast = () => cast.length > 0 && <Cast cast={cast} />
 
@@ -28,14 +40,23 @@ const Details = ({ show }) => {
 
 export const getServerSideProps = async context => {
 
-  const showId = context?.query?.showId || '1';
-  const response = await axios.get(`http://api.tvmaze.com/shows/${showId}?embed=cast`)
+  try {
+    const showId = context?.query?.showId || '1';
+    const response = await axios.get(`http://api.tvmaze.com/shows/${showId}?embed=cast`)
 
-  return {
-    props: {
-      show: response.data
+    return {
+      props: {
+        show: response.data
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        statusCode: error?.response?.status || '500'
+      }
     }
   }
+
 }
 
 export default Details;
