@@ -1,8 +1,16 @@
 import axios from 'axios';
+import Error from 'next/error';
 import Thumbnail from '../../components/Thumbnail';
+
 import './styles.scss';
 
-const Home = ({ shows, country }) => {
+const Home = ({ shows, country, statusCode }) => {
+
+  if (statusCode) {
+    return (
+      <Error statusCode={statusCode} />
+    )
+  }
 
   const renderShows = () => {
     return shows.map((showItem, index) => {
@@ -35,15 +43,24 @@ const Home = ({ shows, country }) => {
 
 export const getServerSideProps = async context => {
 
-  const country = context?.query?.country || 'us';
-  const response = await axios.get(`http://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`);
+  try {
+    const country = context?.query?.country || 'us';
+    const response = await axios.get(`http://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`);
 
-  return {
-    props: {
-      shows: response.data,
-      country
+    return {
+      props: {
+        shows: response.data,
+        country
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        statusCode: error?.response?.status || '500'
+      }
     }
   }
+
 }
 
 export default Home;
