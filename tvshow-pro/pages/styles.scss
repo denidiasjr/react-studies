@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'raleway';
+  src: url('/fonts/raleway/Raleway-Regular.ttf') format('truetype');
+}
+
+html {
+  font-family: 'raleway';
+}
+
 body {
   margin: 0;
   padding: 0;
