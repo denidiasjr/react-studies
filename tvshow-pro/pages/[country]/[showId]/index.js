@@ -42,7 +42,7 @@ export const getServerSideProps = async context => {
 
   try {
     const showId = context?.query?.showId || '1';
-    const response = await axios.get(`http://api.tvmaze.com/shows/${showId}?embed=cast`)
+    const response = await axios.get(`https://api.tvmaze.com/shows/${showId}?embed=cast`)
 
     return {
       props: {
