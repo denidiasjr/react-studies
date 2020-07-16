@@ -1,10 +1,12 @@
 import Router from 'next/router';
+import cookies from 'nookies';
 
 const Home = () => null
 
 export const getServerSideProps = async context => {
 
-  const country = context?.query?.country || 'us';
+  const { defaultCountry } = cookies.get(context);
+  const country = context?.query?.country || defaultCountry || 'us';
 
   process.browser ?
     Router.replace('/[country]', `${country}`) :
