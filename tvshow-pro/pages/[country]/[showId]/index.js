@@ -1,6 +1,7 @@
 import axios from 'axios';
 import htmlParse from 'html-react-parser';
 import Error from 'next/error';
+import withAuthorization from '../../../hocs/withAuthorization';
 import Cast from '../../../components/Cast';
 import './styles.scss';
 
@@ -38,25 +39,20 @@ const Details = ({ show = {}, statusCode }) => {
   )
 }
 
-export const getServerSideProps = async context => {
+Details.getInitialProps = async context => {
 
   try {
     const showId = context?.query?.showId || '1';
     const response = await axios.get(`https://api.tvmaze.com/shows/${showId}?embed=cast`)
 
     return {
-      props: {
-        show: response.data
-      }
+      show: response.data
     }
   } catch (error) {
     return {
-      props: {
-        statusCode: error?.response?.status || '500'
-      }
+      statusCode: error?.response?.status || '500'
     }
   }
-
 }
 
-export default Details;
+export default withAuthorization(Details);

@@ -1,13 +1,8 @@
+import { Component } from 'react';
 import cookies from 'nookies';
 import Router from 'next/router';
 
-const withAuthorization = WrappedComponent => props => {
-  return (
-    <WrappedComponent {...props} />
-  )
-}
-
-withAuthorization.isAuth = async context => {
+const authenticate = context => {
   const { token } = cookies.get(context);
 
   // Checking if cookie is present
@@ -26,6 +21,25 @@ withAuthorization.isAuth = async context => {
   }
 
   return token;
+}
+
+const withAuthorization = WrappedComponent => {
+  return class extends Component {
+
+    static getInitialProps = async (context) => {
+
+      const token = authenticate(context);
+
+      const componentProps = WrappedComponent.getInitialProps &&
+        (await WrappedComponent.getInitialProps(context));
+
+      return { ...componentProps, token };
+    }
+
+    render() {
+      return <WrappedComponent {...this.props} />
+    }
+  }
 }
 
 export default withAuthorization;
