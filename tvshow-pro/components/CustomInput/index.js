@@ -1,9 +1,16 @@
 import './styles.scss';
 
 const CustomInput = props => {
+
+  const {
+    error,
+    ...otherProps
+  } = props;
+
   return (
     <div className="custom-input">
-      <input {...props} />
+      <input {...otherProps} />
+      {error && <div className="error">{error}</div>}
     </div>
   )
 }
