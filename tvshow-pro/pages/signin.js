@@ -18,8 +18,6 @@ const Signin = () => {
   const [signinError, setSigninError] = useState(initialState);
   const router = useRouter();
 
-  const { defaultCountry } = cookies.get(null);
-
   const handleSubmit = async e => {
     e.preventDefault();
 
@@ -34,7 +32,16 @@ const Signin = () => {
       );
 
       cookies.set(null, 'token', response?.data?.token, { path: '/' });
-      router.replace('/[country]', `/${defaultCountry}`);
+
+      const { defaultCountry, plannedRoute } = cookies.get();
+
+      const plannedRouteObject = plannedRoute && JSON.parse(plannedRoute);
+
+      const plannedHrefRoute = plannedRouteObject?.href ?? '/[country]';
+      const plannedAsRoute = plannedRouteObject?.as ?? `/${defaultCountry}`;
+
+
+      router.replace(plannedHrefRoute, plannedAsRoute);
 
     } catch (error) {
       setSigninError({ ...signinError, password: error.message });
