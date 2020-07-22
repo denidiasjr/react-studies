@@ -23,7 +23,13 @@ const authenticate = context => {
   return token;
 }
 
-const withAuthorization = WrappedComponent => {
+export const isAuthenticated = context => {
+  const { token } = cookies.get(context);
+
+  return token;
+}
+
+export const withAuthorization = WrappedComponent => {
   return class extends Component {
 
     static getInitialProps = async (context) => {

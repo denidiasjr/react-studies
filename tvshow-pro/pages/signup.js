@@ -8,62 +8,70 @@ import validateEmail from '../utils/validators/validateEmail';
 import validateRequired from '../utils/validators/validateRequired';
 
 const initialState = {
+  name: '',
   email: '',
   password: ''
 }
 
-const Signin = () => {
+const Signup = () => {
 
-  const [signinInfo, setSigninInfo] = useState(initialState);
-  const [signinError, setSigninError] = useState(initialState);
+  const [signupInfo, setSignupInfo] = useState(initialState);
+  const [signupError, setSignupError] = useState(initialState);
   const router = useRouter();
-
-  const { defaultCountry } = cookies.get(null);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (!signinInfo.email || !signinInfo.password) {
+    if (!signupInfo.email || !signupInfo.password || !signupInfo.name) {
       return;
     }
 
     try {
       const response = await axios.post(
-        'https://iwallet-api.herokuapp.com/api/auth/signin',
-        { ...signinInfo }
+        'https://iwallet-api.herokuapp.com/api/auth/signup',
+        { ...signupInfo }
       );
 
       cookies.set(null, 'token', response?.data?.token, { path: '/' });
-      router.replace('/[country]', `/${defaultCountry}`);
+      router.replace('/[country]', '/us');
 
     } catch (error) {
-      setSigninError({ ...signinError, password: error.message });
+      setSignupError({ ...signupError, password: error.message });
     }
   }
 
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setSigninInfo({ ...signinInfo, [name]: value });
+    setSignupInfo({ ...signupInfo, [name]: value });
   }
 
   const handleInputBlur = (e, validator) => {
     const { name, value } = e.target;
 
-    setSigninError({
-      ...signinError,
+    setSignupError({
+      ...signupError,
       [name]: validator(value) ? '' : `Invalid ${name}`
     });
   }
 
   return (
-    <div className="signin">
+    <div className="signup">
       <form onSubmit={handleSubmit}>
+        <CustomInput
+          name="name"
+          type="text"
+          placeholder="Enter your name"
+          error={signupError.name}
+          value={signupInfo.name}
+          onChange={handleInputChange}
+          onBlur={e => handleInputBlur(e, validateRequired)}
+        />
         <CustomInput
           name="email"
           type="email"
           placeholder="Enter your email"
-          error={signinError.email}
-          value={signinInfo.email}
+          error={signupError.email}
+          value={signupInfo.email}
           onChange={handleInputChange}
           onBlur={e => handleInputBlur(e, validateEmail)}
         />
@@ -71,13 +79,13 @@ const Signin = () => {
           name="password"
           type="password"
           placeholder="Enter your password"
-          error={signinError.password}
-          value={signinInfo.password}
+          error={signupError.password}
+          value={signupInfo.password}
           onChange={handleInputChange}
           onBlur={e => handleInputBlur(e, validateRequired)}
         />
-        <Link href="/signup">
-          <a>Create an account</a>
+        <Link href="/signin">
+          <a>Already have an account?</a>
         </Link>
         <button type="submit">Submit</button>
       </form>
@@ -85,4 +93,4 @@ const Signin = () => {
   )
 }
 
-export default Signin;
+export default Signup;
