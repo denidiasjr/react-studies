@@ -8,7 +8,7 @@ const Cast = ({ cast }) => {
 
       const {
         person: {
-          image, name
+          image, name, id
         }
       } = castItem;
 
@@ -19,6 +19,8 @@ const Cast = ({ cast }) => {
           <Thumbnail
             imageUrl={image?.medium || defaultImageUrl}
             caption={name}
+            href={`/cast?personId=${id}`}
+            as={`/cast/${id}`}
             small
           />
         </li>
