@@ -1,0 +1,1 @@
+export { Congrats as default } from './Congrats';
