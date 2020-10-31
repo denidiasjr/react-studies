@@ -1,6 +1,7 @@
 import React from 'react';
 import Congrats from './components/Congrats';
 import GuessedWords from './components/GuessedWords';
+import Input from './components/Input';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="container">
       <h1>Jotto</h1>
+      {/* <Input /> */}
       <Congrats success={true} />
       <GuessedWords guessedWords={guessedWords} />
     </div>
