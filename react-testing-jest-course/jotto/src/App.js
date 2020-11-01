@@ -1,22 +1,29 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { connect } from 'react-redux';
 import Congrats from './components/Congrats';
 import GuessedWords from './components/GuessedWords';
 import Input from './components/Input';
 import './App.css';
 
-function App() {
+class App extends React.Component {
 
-  const state = useSelector(state => state);
-
-  return (
-    <div className="container">
-      <h1>Jotto</h1>
-      <Input />
-      <Congrats success={state.success} />
-      <GuessedWords guessedWords={state.guessedWords} />
-    </div>
-  );
+  render() {
+    return (
+      <div className="container">
+        <h1>Jotto</h1>
+        <Input />
+        <Congrats success={this.props.success} />
+        <GuessedWords guessedWords={this.props.guessedWords} />
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    success: state.success,
+    guessedWords: state.guessedWords
+  }
+}
+
+export default connect(mapStateToProps)(App);
