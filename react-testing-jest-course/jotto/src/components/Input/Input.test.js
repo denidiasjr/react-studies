@@ -69,7 +69,3 @@ describe('render', () => {
   });
 
 });
-
-describe('update state', () => {
-
-});
