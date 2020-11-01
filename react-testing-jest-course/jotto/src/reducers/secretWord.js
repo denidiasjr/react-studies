@@ -1,6 +1,6 @@
 import { actionTypes } from '../actions';
 
-export const initialState = [];
+export const initialState = null;
 
 export const reducer = (state = initialState, action = {}) => {
   
@@ -8,10 +8,7 @@ export const reducer = (state = initialState, action = {}) => {
   
   switch (type) {
     case (actionTypes.GUESS_WORD):
-      return [
-        ...state,
-        action.payload
-      ];
+      return state;
     default:
       return state;
   }
