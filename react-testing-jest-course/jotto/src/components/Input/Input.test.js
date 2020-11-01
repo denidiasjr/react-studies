@@ -1,17 +1,14 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
+import { shallow } from 'enzyme';
 import { findByTestAttr, storeFactory } from '../../test/utils';
 import Input from './';
 
 const setup = (initialState = {}) => {
   const store = storeFactory(initialState);
 
-  const wrapper = mount(
-    <Provider store={store}>
-      <Input />
-    </Provider>
-  );
+  const wrapper = shallow(
+    <Input store={store} />
+  ).dive().dive();
 
   return wrapper;
 }
