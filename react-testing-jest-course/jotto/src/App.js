@@ -3,9 +3,14 @@ import { connect } from 'react-redux';
 import Congrats from './components/Congrats';
 import GuessedWords from './components/GuessedWords';
 import Input from './components/Input';
+import { getSecretWord } from './actions';
 import './App.css';
 
-class App extends React.Component {
+export class App extends React.Component {
+
+  componentDidMount() {
+    this.props.getSecretWord();
+  }
 
   render() {
     return (
@@ -26,4 +31,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapActionsToProps = () => {
+  return {
+    getSecretWord
+  }
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(App);
