@@ -1,7 +1,7 @@
 import checkPropTypes from 'check-prop-types';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from '../reducers';
-import { initialState } from '../reducers/success';
+import { middlewares } from '../configureStore';
 
 /**
  * Function to find a data-test attribute inside a ShallowWrapper 
@@ -25,5 +25,6 @@ export const checkProps = (component, conformingProps) => {
 }
 
 export const storeFactory = (initialState) => {
-  return createStore(reducer, initialState);
+  const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
+  return createStoreWithMiddleware(reducer, initialState);
 }
