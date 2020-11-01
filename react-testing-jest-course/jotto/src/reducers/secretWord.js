@@ -7,8 +7,8 @@ export const reducer = (state = initialState, action = {}) => {
   const { type } = action;
   
   switch (type) {
-    case (actionTypes.GUESS_WORD):
-      return state;
+    case (actionTypes.SET_SECRET_WORD):
+      return action.payload;
     default:
       return state;
   }
