@@ -8,7 +8,7 @@ export class Input extends React.Component {
     super(props);
 
     this.state = {
-      currentGuess: null
+      currentGuess: ''
     };
   }
 
@@ -19,6 +19,7 @@ export class Input extends React.Component {
 
     if (guessedWord && guessedWord.length > 1){
       this.props.guessWord(this.state.currentGuess);
+      this.setState({ currentGuess: '' })
     }
   }
 
@@ -56,10 +57,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapActionsToProps = (state) => {
-  return {
-    guessWord
-  }
+const mapActionsToProps = {
+  guessWord
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(Input);

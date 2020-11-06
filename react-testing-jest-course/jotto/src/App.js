@@ -16,8 +16,9 @@ export class App extends React.Component {
     return (
       <div className="container">
         <h1>Jotto</h1>
-        <Input />
+        <div>The secret word is {this.props.secretWord}</div>
         <Congrats success={this.props.success} />
+        <Input />
         <GuessedWords guessedWords={this.props.guessedWords} />
       </div>
     );
@@ -27,14 +28,13 @@ export class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     success: state.success,
-    guessedWords: state.guessedWords
+    guessedWords: state.guessedWords,
+    secretWord: state.secretWord
   }
 }
 
-const mapActionsToProps = () => {
-  return {
-    getSecretWord
-  }
+const mapActionsToProps = {
+  getSecretWord
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(App);
