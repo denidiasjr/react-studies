@@ -6,6 +6,10 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, "dist")
   },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    port: 9000
+  },
   module: {
     rules: [
       {
@@ -17,6 +21,25 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+        ]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        use: [
+          {
+            loader: 'url-loader'
+          },
+        ]
       }
     ]
   }
