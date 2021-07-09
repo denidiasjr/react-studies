@@ -29,7 +29,7 @@
 
             // TODO: Stop the current animation when clicked
             document.getElementById("btnStop").addEventListener("click", function () {
-
+                cancelAnimationFrame(animationRef)
             })
 
             // get a reference to the canvas element
@@ -51,7 +51,7 @@
 
                 // TODO: start the animation by requesting a time slice
                 // to draw the scene updates
-
+                animationRef = requestAnimationFrame(anim)
             }
 
             // Erases the given canvas and draws a colored background
@@ -86,7 +86,7 @@
                 context.strokeRect(rectX, rectY, rectW, rectW);
 
                 // TODO: request another update frame from the browser
-
+                animationRef = requestAnimationFrame(anim)
             }
         </script>
     </body>
