@@ -93,25 +93,28 @@
         </div>
         <script>
             window.addEventListener("load", function () {
-                // Create a new Observer
-                var observer = new IntersectionObserver(function (entries) {
-                    // log the callback data to the console output
-                    console.log(entries);
-                    if (entries[0].intersectionRatio < 0.5) {
-                        entries[0].target.className = "background0"
+                // TODO: Create a new Observer
+                const elementToObserve = document.getElementById('targetElem');
+
+                const observerConfigs = {
+                    threshold: [0, 0.5, 1.0]
+                }
+
+                const observerCallback = entries => {
+                    for (const entry of entries) {
+                        if (entry.intersectionRatio >= 0 && entry.intersectionRatio < 0.5) {
+                            elementToObserve.className = 'background0';
+                        } else if (entry.intersectionRatio >= 0.5 && entry.intersectionRatio < 1) {
+                            elementToObserve.className = 'background50';
+                        } else if (entry.intersectionRatio === 1) {
+                            elementToObserve.className = 'background100';
+                        }
                     }
-                    if (entries[0].intersectionRatio >= 0.5 && entries[0].intersectionRatio < 1) {
-                        entries[0].target.className = "background50"
-                    }
-                    if (entries[0].intersectionRatio >= 1) {
-                        entries[0].target.className = "background100"
-                    }
-                },
-                    {
-                        "threshold": [0, 0.5, 1]
-                    });
-                // Start observing the target element
-                observer.observe(document.getElementById("targetElem"))
+                };
+                const observer = new IntersectionObserver(observerCallback, observerConfigs);
+
+                // TODO: Start observing the target element
+                observer.observe(elementToObserve)
             })
         </script>
     </body>
