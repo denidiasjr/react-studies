@@ -1,0 +1,51 @@
+mutation {
+  createFriend(input: {
+    firstName: "Thayna",
+    lastName: "Oliveira",
+    email: "oliveira.thayna@outlook.com"
+  }){
+    id
+    firstName
+    lastName
+  }
+}
+
+mutation {
+  createFriend(input: {
+    firstName: "Lucas",
+    lastName: "Santiago",
+    email: "lucas.santiago@outlook.com",
+    gender: MALE,
+    contacts: [
+      {
+        firstName: "Mãe",
+        lastName: "do Santiago",
+        email: "mae@santiago.com"
+      },
+      {
+        firstName: "Pai",
+        lastName: "do Santiago",
+        email: "pai@santiago.com"
+      },
+    ]
+  }){
+    id
+    firstName
+    lastName
+    contacts {
+      firstName
+      lastName
+      email
+    }
+  }
+}
+
+query {
+  getFriend(id: "130947504969931"){
+    id
+    firstName
+    lastName
+    email
+    gender
+  }
+}

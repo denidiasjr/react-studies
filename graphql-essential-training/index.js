@@ -1,18 +1,17 @@
-import express from 'express'
-import schema from './schema'
-import { graphqlHTTP } from 'express-graphql'
+import express from 'express';
+import schema from './schema';
+import { graphqlHTTP } from 'express-graphql';
+import resolvers from './resolvers';
 
-const app = express()
+const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Learning GraphQL here on LinkedIn')
+  res.send('Learning GraphQL here on LinkedIn');
 })
-
-const root = { hello: () => "Hi, my name is Deni!"}
 
 app.use('/graphql', graphqlHTTP({
   schema: schema,
-  rootValue: root,
+  rootValue: resolvers,
   graphiql: true 
 }))
 
