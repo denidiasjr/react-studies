@@ -1,9 +1,15 @@
 import { Friends, Aliens } from './dbConnectors';
 
 const resolvers = {
-  getFriend: ({ id }) => { 
-    return new Friend(id, friendsDatabase[id])
-  },
+  getFriend: ({ id }) => new Promise((resolve, reject) => {
+    Friends.findById(id, null, null, (err, friend) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(friend);
+    })
+  }),
   createFriend: ({ input }) => {
     const newFriend = new Friends({
       firstName: input.firstName,
