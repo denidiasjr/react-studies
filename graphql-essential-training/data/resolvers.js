@@ -35,7 +35,16 @@ const resolvers = {
 
       resolve(friend);
     })
-  })
+  }),
+  deleteFriend: ({ id }) => new Promise((resolve, reject) => {
+    Friends.remove({ _id: id }, (err) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve('Friend deleted successfully.');
+    })
+  }),
 }
 
 export default resolvers;

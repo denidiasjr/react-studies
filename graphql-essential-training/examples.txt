@@ -1,17 +1,5 @@
 mutation {
   createFriend(input: {
-    firstName: "Siclano",
-    lastName: "Silva",
-    email: "siclano.silva@outlook.com"
-  }){
-    id
-    firstName
-    lastName
-  }
-}
-
-mutation {
-  createFriend(input: {
     firstName: "Beltrano",
     lastName: "Oliveira",
     email: "beltrano.oliveira@outlook.com",
@@ -38,6 +26,23 @@ mutation {
       email
     }
   }
+}
+
+mutation {
+  updateFriend(input: {
+    id: "612ce0ec574cf24a42357085",
+    age: 42
+  }) {
+    id
+    firstName
+    lastName
+    gender
+    age
+  }
+}
+
+mutation {
+	deleteFriend(id: "612cdc4ec86e14bdeabbadde")
 }
 
 query {
