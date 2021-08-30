@@ -1,8 +1,8 @@
 mutation {
   createFriend(input: {
-    firstName: "Thayna",
-    lastName: "Oliveira",
-    email: "oliveira.thayna@outlook.com"
+    firstName: "Siclano",
+    lastName: "Silva",
+    email: "siclano.silva@outlook.com"
   }){
     id
     firstName
@@ -12,20 +12,20 @@ mutation {
 
 mutation {
   createFriend(input: {
-    firstName: "Lucas",
-    lastName: "Santiago",
-    email: "lucas.santiago@outlook.com",
+    firstName: "Beltrano",
+    lastName: "Oliveira",
+    email: "beltrano.oliveira@outlook.com",
     gender: MALE,
     contacts: [
       {
         firstName: "Mãe",
-        lastName: "do Santiago",
-        email: "mae@santiago.com"
+        lastName: "do Beltrano",
+        email: "mae@beltrano.com"
       },
       {
         firstName: "Pai",
-        lastName: "do Santiago",
-        email: "pai@santiago.com"
+        lastName: "do Beltrano",
+        email: "pai@beltrano.com"
       },
     ]
   }){

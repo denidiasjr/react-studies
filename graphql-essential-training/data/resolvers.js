@@ -20,13 +20,22 @@ const resolvers = {
     return new Promise((resolve, reject) => {
       newFriend.save(err => {
         if (err) {
-          return reject();
+          return reject(err);
         }
 
         resolve(newFriend);
       });
     });
-  }
+  },
+  updateFriend: ({ input }) => new Promise((resolve, reject) => {
+    Friends.findOneAndUpdate({ _id: input.id }, input, { new: true }, (err, friend) => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(friend);
+    })
+  })
 }
 
 export default resolvers;
