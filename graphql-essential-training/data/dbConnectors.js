@@ -54,3 +54,13 @@ export const Aliens = sequelize.define('aliens', {
     type: Sequelize.STRING
   },
 });
+
+Aliens.sync({ force: true }).then(() => {
+  _.times(10, i => {
+    Aliens.create({
+      firstName: casual.first_name,
+      lastName: casual.last_name,
+      planet: casual.word
+    });
+  });
+});

@@ -33,6 +33,7 @@ const schema = buildSchema(`
 
   type Query {
     getFriend(id: ID): Friend
+    getAliens: [Alien]
   }
 
   input FriendInput {

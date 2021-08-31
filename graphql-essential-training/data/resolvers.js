@@ -10,6 +10,7 @@ const resolvers = {
       resolve(friend);
     })
   }),
+  getAliens: () => Aliens.findAll(),
   createFriend: ({ input }) => {
     const newFriend = new Friends({
       firstName: input.firstName,
