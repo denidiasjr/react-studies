@@ -1,7 +1,7 @@
 class Department {
   private readonly id: string
   private name: string
-  private employees: string[] = []
+  protected employees: string[] = []
 
   constructor(id: string, name: string) {
     this.id = id;
@@ -56,7 +56,7 @@ class ITDepartment extends Department {
   }
 }
 
-const accounting = new Department('123','Accounting');
+const accounting = new AccountingDepartment('123', []);
 accounting.describe();
 accounting.addEmployee('Fulano');
 accounting.addEmployee('Siclano');
