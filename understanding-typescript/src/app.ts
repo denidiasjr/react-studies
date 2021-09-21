@@ -26,13 +26,22 @@ abstract class Department {
 }
 
 class AccountingDepartment extends Department {
+  private static instance: AccountingDepartment
   private reports: string[]
   private lastReport: string
 
-  constructor(id: string, reports: string[]) {
+  private constructor(id: string, reports: string[]) {
     super(id, 'Accounting');
     this.reports = reports;
     this.lastReport = reports[0];
+  }
+
+  static getInstance() {
+    if (!this.instance) {
+      this.instance = new AccountingDepartment('d2', ['Report1', 'Report2']);
+    }
+
+    return this.instance;
   }
   
   describe() {
@@ -82,7 +91,7 @@ class ITDepartment extends Department {
   }
 }
 
-const accounting = new AccountingDepartment('123', ['Report1', 'Report2']);
+const accounting = AccountingDepartment.getInstance();
 accounting.describe();
 accounting.addEmployee('Fulano');
 accounting.addEmployee('Siclano');
