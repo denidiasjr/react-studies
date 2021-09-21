@@ -24,14 +24,29 @@ class Department {
 
 class AccountingDepartment extends Department {
   private reports: string[]
+  private lastReport: string
 
   constructor(id: string, reports: string[]) {
     super(id, 'Accounting');
     this.reports = reports;
+    this.lastReport = reports[0];
+  }
+
+  get mostRecentReport() {
+    return this.lastReport;
+  }
+
+  set mostRecentReport(report: string) {
+    if (!report) {
+      throw new Error('Not valid report');
+    }
+
+    this.addReport(report);
   }
 
   addReport(report: string) {
     this.reports.push(report);
+    this.lastReport = report;
   }
 
   printReports() {
@@ -56,8 +71,11 @@ class ITDepartment extends Department {
   }
 }
 
-const accounting = new AccountingDepartment('123', []);
+const accounting = new AccountingDepartment('123', ['Report1', 'Report2']);
 accounting.describe();
 accounting.addEmployee('Fulano');
 accounting.addEmployee('Siclano');
+accounting.mostRecentReport = 'Report3';
+console.log(accounting.mostRecentReport)
 accounting.printEmployeeInformation();
+accounting.printReports();
